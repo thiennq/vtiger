@@ -31,9 +31,11 @@ RUN { \
         echo 'opcache.enable_cli=1'; \
     } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
+EXPOSE 80
+
 WORKDIR /var/www/html
 
-RUN curl -o vtigercrm.tar.gz -SL http://sourceforge.net/projects/vtigercrm/files/vtiger%20CRM%207.0.1/Core%20Product/vtigercrm7.0.1.tar.gz \
+RUN curl -o vtigercrm.tar.gz -SL https://sourceforge.net/projects/vtigercrm/files/latest/download/vtigercrm7.1.0.tar.gz \
     && tar -xzf vtigercrm.tar.gz \
     && rm vtigercrm.tar.gz \
     && chmod -R 775 vtigercrm \
