@@ -1,0 +1,24 @@
+version: '2'
+services:
+
+  vtiger:
+    image: thiennq/vtiger
+    environment:
+      - DB_HOSTNAME=mariadb
+      - DB_NAME=vtiger
+      - DB_USERNAME=vtiger_user
+      - DB_PASSWORD=pwd
+    ports:
+      - "40080:80"
+    links:
+      - mariadb
+    restart: "no"
+
+  mariadb:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=vtiger
+      - MYSQL_USER=vtiger_user
+      - MYSQL_PASSWORD=pwd
+    restart: "no"
