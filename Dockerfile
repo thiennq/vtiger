@@ -40,7 +40,7 @@ RUN curl -o vtigercrm.tar.gz -SL https://sourceforge.net/projects/vtigercrm/file
     && tar -xzf vtigercrm.tar.gz \
     && rm vtigercrm.tar.gz \
     && rm -rf html \
-    && mv vtigercrm html
+    && mv vtigercrm html \
     && chmod -R 775 html \
     && chown -R www-data:www-data html
 
