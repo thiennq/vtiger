@@ -34,13 +34,15 @@ RUN { \
 
 EXPOSE 80
 
-WORKDIR /var/www/html
+WORKDIR /var/www
 
 RUN curl -o vtigercrm.tar.gz -SL https://sourceforge.net/projects/vtigercrm/files/latest/download/vtigercrm7.1.0.tar.gz \
     && tar -xzf vtigercrm.tar.gz \
     && rm vtigercrm.tar.gz \
-    && chmod -R 775 vtigercrm \
-    && chown -R www-data:www-data vtigercrm
+    && rm -rf html \
+    && mv vtigercrm html
+    && chmod -R 775 html \
+    && chown -R www-data:www-data html
 
 COPY docker-entrypoint.sh /entrypoint.sh
 

@@ -5,7 +5,7 @@ Docker for Vtiger CRM 7.1
 docker pull thiennq/vtiger `
 ```
 
-#### Run Containers:
+### Run Containers:
 
 ##### 1) MariaDB:
 ```bash
@@ -21,13 +21,13 @@ docker run --name vtiger -dit \
 -p 80:80 --net=host ruslanguns/vtiger
 ```
 
-#### Docker compose:
+### Docker compose:
+- Update environment variables
+- Run
+```bash
+docker-compose up -d
+```
 
 
-#### TODO:
-- [ ] Add docker-compose.yml
-- [ ] Remove `/vtigercrm` in path
-
-#### CONFIGURATION:
-
-Follow the steps: [http://localhost/vtigercrm](http://localhost/vtigercrm)
+### CONFIGURATION:
+Follow the steps: [http://localhost](http://localhost)
