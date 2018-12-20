@@ -2,7 +2,7 @@ version: '2'
 services:
 
   vtiger:
-    image: thiennq/vtiger
+    image: thiennq/vtiger:latest
     environment:
       - DB_HOSTNAME=mariadb
       - DB_NAME=vtiger

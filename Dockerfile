@@ -46,6 +46,7 @@ RUN curl -o vtigercrm.tar.gz -SL https://sourceforge.net/projects/vtigercrm/file
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
+
 ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["apache2-foreground"]
