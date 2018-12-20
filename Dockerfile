@@ -3,7 +3,8 @@ FROM php:5.6-apache
 RUN a2enmod rewrite expires
 
 # install the PHP extensions we need
-RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev libkrb5-dev \
+RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libkrb5-dev \
+    && apt-get install -y --no-install-recommends apt-utils \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-install gd mysqli \
     && apt-get -y install libssl-dev libc-client2007e-dev libkrb5-dev \
@@ -31,9 +32,11 @@ RUN { \
         echo 'opcache.enable_cli=1'; \
     } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
+EXPOSE 80
+
 WORKDIR /var/www/html
 
-RUN curl -o vtigercrm.tar.gz -SL http://sourceforge.net/projects/vtigercrm/files/vtiger%20CRM%207.0.1/Core%20Product/vtigercrm7.0.1.tar.gz \
+RUN curl -o vtigercrm.tar.gz -SL https://sourceforge.net/projects/vtigercrm/files/latest/download/vtigercrm7.1.0.tar.gz \
     && tar -xzf vtigercrm.tar.gz \
     && rm vtigercrm.tar.gz \
     && chmod -R 775 vtigercrm \
