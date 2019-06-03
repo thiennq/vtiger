@@ -14,34 +14,36 @@ RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libkrb5-dev \
 
 # setting the recommended for vtiger
 RUN { \
-        echo 'display_errors=On'; \
-        echo 'max_execution_time=0'; \
-        echo 'error_reporting=E_WARNING & ~E_NOTICE & ~E_DEPRECATED'; \
-        echo 'log_errors=Off'; \
-        echo 'short_open_tag=On'; \
+    echo 'display_errors=On'; \
+    echo 'max_execution_time=0'; \
+    echo 'error_reporting=E_WARNING & ~E_NOTICE & ~E_DEPRECATED'; \
+    echo 'log_errors=Off'; \
+    echo 'short_open_tag=On'; \
     } > /usr/local/etc/php/conf.d/vtiger-recommended.ini
 
 # setting the reccomended for opcache
 # https://secure.php.net/manual/en/opcache.installation.php
 RUN { \
-        echo 'opcache.memory_consumption=128'; \
-        echo 'opcache.interned_strings_buffer=8'; \
-        echo 'opcache.max_accelerated_files=4000'; \
-        echo 'opcache.revalidate_freq=60'; \
-        echo 'opcache.fast_shutdown=1'; \
-        echo 'opcache.enable_cli=1'; \
+    echo 'opcache.memory_consumption=128'; \
+    echo 'opcache.interned_strings_buffer=8'; \
+    echo 'opcache.max_accelerated_files=4000'; \
+    echo 'opcache.revalidate_freq=60'; \
+    echo 'opcache.fast_shutdown=1'; \
+    echo 'opcache.enable_cli=1'; \
     } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 EXPOSE 80
 
 WORKDIR /var/www
 
-RUN curl -o vtigercrm.tar.gz -SL https://sourceforge.net/projects/vtigercrm/files/latest/download/vtigercrm7.1.0.tar.gz \
-    && tar -xzf vtigercrm.tar.gz \
-    && rm vtigercrm.tar.gz \
-    && rm -rf html \
-    && mv vtigercrm html \
-    && chmod -R 775 html \
+# RUN curl -o vtigercrm.tar.gz -SL https://sourceforge.net/projects/vtigercrm/files/latest/download/vtigercrm7.1.0.tar.gz \
+#     && tar -xzf vtigercrm.tar.gz \
+#     && rm vtigercrm.tar.gz \
+#     && rm -rf html \
+#     && mv vtigercrm html \
+
+COPY vtigercrm html
+RUN chmod -R 775 html \
     && chown -R www-data:www-data html
 
 COPY docker-entrypoint.sh /entrypoint.sh

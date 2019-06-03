@@ -1,8 +1,7 @@
-version: '2'
+version: "2"
 services:
-
   vtiger:
-    image: thiennq/vtiger:latest
+    build: .
     environment:
       - DB_HOSTNAME=mariadb
       - DB_NAME=vtiger
@@ -13,6 +12,8 @@ services:
     links:
       - mariadb
     restart: "no"
+    # volumes:
+    #   - ./vtigercrm:/var/www/html:rw
 
   mariadb:
     image: mariadb
@@ -22,3 +23,5 @@ services:
       - MYSQL_USER=vtiger_user
       - MYSQL_PASSWORD=pwd
     restart: "no"
+    ports:
+      - 13306:3306
